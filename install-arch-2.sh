@@ -32,7 +32,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S --noconfirm networkmanager
 systemctl enable NetworkManager
 
-function install_base{
+function install_base(){
     pacman -S --noconfirm xorg-server xorg-xinit
     echo "Enter a username"
     read user
@@ -42,17 +42,17 @@ function install_base{
 
 }
 
-function install_kde{
+function install_kde(){
     install_base
     pacman -S --noconfirm plasma
 }
 
-function install_gnome{
+function install_gnome(){
     install_base
     pacman -S --noconfirm gnome
 }
 
-function install_larbs{
+function install_larbs(){
     curl -LO larbs.xyz/larbs.sh
     sh larbs.sh
 }
