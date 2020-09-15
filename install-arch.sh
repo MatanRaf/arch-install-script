@@ -65,6 +65,8 @@ pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cp install-arch-2.sh /mnt
+sed -i s/sdX/${driveToPartition}/ /mnt/install-arch-2.sh
+chmod +x /mnt/install-arch-2.sh
 echo "Chrooting into the new system"
 arch-chroot /mnt
 
