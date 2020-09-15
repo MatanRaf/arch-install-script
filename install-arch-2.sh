@@ -8,6 +8,8 @@ ln -sf /usr/share/zoneinfo/Israel /etc/localtime
 hwclock --systohc
 
 sed -i s/"#en_US.UTF-8"/"en_US.UTF-8"/ /etc/locale.gen
+sed -i s/"#he_IL.UTF-8"/"he_IL.UTF-8"/ /etc/locale.gen
+
 locale-gen
 
 echo LANG=en_US.UTF-8 > /etc/locale.conf
@@ -30,12 +32,41 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S networkmanager
 systemctl enable NetworkManager
 
+function install_base{
+    pacman -S xorg-server xorg-xinit
+    echo "Enter a username"
+    read user
+    useradd -m ${user}
+    passwd ${user}
+    sed 's/root ALL=(ALL) ALL/root ALL=(ALL) ALL\n${user} ALL=(ALL) ALL/g' -i /etc/sudoers
 
-echo "Do you want to install larbs?"
+}
 
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) curl -LO larbs.xyz/larbs.sh; sh larbs.sh; break;;
-        No ) break;;
+function install_kde{
+    install_base
+    pacman -S plasma
+}
+
+function install_gnome{
+    install_base
+    pacman -S gnome
+}
+
+function install_larbs{
+    curl -LO larbs.xyz/larbs.sh
+    sh larbs.sh
+}
+
+echo "What do you want to install?"
+
+select de in "gnome" "kde" "larbs" "base install" "Nothing, I can install it myself"; do
+    case $de in
+        gnome ) install_gnome; break;;
+        kde ) install_gnome; break;;
+        larbs ) install_gnome; break;;
+        base install ) install_base; break;;
+        Nothing, I can install it myself ) break;;
     esac
 done
+
+echo "Thank you for using this Arch Linux install script!"
