@@ -64,12 +64,8 @@ pacstrap /mnt base linux linux-firmware
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
+cp install-arch-2.sh /mnt
 echo "Chrooting into the new system"
 arch-chroot /mnt
 
-echo "In Chroot"
-ls
-ln -sf /usr/share/zoneinfo/Israel /etc/localtime
-hwclock -systohc
-# locale-gen
 
