@@ -60,9 +60,14 @@ mount /dev/${driveToPartition}2 /mnt
 
 swapon /dev/${driveToPartition}1
 
+pacstrap /mnt base linux linux-firmware
 
+genfstab -U /mnt >> /mnt/etc/fstab
 
-# ln -sf /usr/share/zoneinfo/Israel /etc/localtime
-# hwclock -systohc
+echo "Chrooting into the new system"
+arch-chroot /mnt
+
+ln -sf /usr/share/zoneinfo/Israel /etc/localtime
+hwclock -systohc
 # locale-gen
 
