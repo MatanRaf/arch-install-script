@@ -67,6 +67,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "Chrooting into the new system"
 arch-chroot /mnt
 
+echo "In Chroot"
+ls
 ln -sf /usr/share/zoneinfo/Israel /etc/localtime
 hwclock -systohc
 # locale-gen
