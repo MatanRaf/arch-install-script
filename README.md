@@ -17,3 +17,7 @@ git clone https://github.com/MatanRaf/arch-install-script.git
 ```
 arch-install-script/install-arch.sh
 ```
+5. After entering chroot, run part 2 of the script
+```
+./install-arch-2.sh
+```

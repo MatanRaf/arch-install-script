@@ -25,15 +25,15 @@ echo "127.0.1.1	$myhostname.localdomain	$myhostnamet" >> /etc/hosts
 
 passwd
 
-pacman -S grub
+pacman -S --noconfirm grub
 grub-install --target=i386-pc /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 
-pacman -S networkmanager
+pacman -S --noconfirm networkmanager
 systemctl enable NetworkManager
 
 function install_base{
-    pacman -S xorg-server xorg-xinit
+    pacman -S --noconfirm xorg-server xorg-xinit
     echo "Enter a username"
     read user
     useradd -m ${user}
@@ -44,12 +44,12 @@ function install_base{
 
 function install_kde{
     install_base
-    pacman -S plasma
+    pacman -S --noconfirm plasma
 }
 
 function install_gnome{
     install_base
-    pacman -S gnome
+    pacman -S --noconfirm gnome
 }
 
 function install_larbs{

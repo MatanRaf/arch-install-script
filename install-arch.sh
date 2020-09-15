@@ -69,8 +69,6 @@ sed -i s/sdX/${driveToPartition}/ /mnt/install-arch-2.sh
 chmod +x /mnt/install-arch-2.sh
 
 echo "Chrooting into the new system"
-arch-chroot /mnt << EOF
-/install-arch-2.sh
-EOF
+arch-chroot /mnt
 
 
