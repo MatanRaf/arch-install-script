@@ -30,26 +30,28 @@ grub-install --target=i386-pc /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -S --noconfirm networkmanager
-systemctl enable NetworkManager
+systemctl enable NetworkManager.service
 
 function install_base(){
-    pacman -S --noconfirm xorg-server xorg-xinit
+    pacman -S --noconfirm xorg base-devel
     echo "Enter a username"
     read user
     useradd -m ${user}
     passwd ${user}
-    sed 's/root ALL=(ALL) ALL/root ALL=(ALL) ALL\n${user} ALL=(ALL) ALL/g' -i /etc/sudoers
+    sed "s/root ALL=(ALL) ALL/root ALL=(ALL) ALL\n${user} ALL=(ALL) ALL/g" -i /etc/sudoers
 
 }
 
 function install_kde(){
     install_base
-    pacman -S --noconfirm plasma
+    pacman -S --noconfirm plasma plasma-wayland-session kde-applications
+    systemctl enable sddm.service 
 }
 
 function install_gnome(){
     install_base
     pacman -S --noconfirm gnome
+    systemctl enable gdm.service
 }
 
 function install_larbs(){
