@@ -61,11 +61,11 @@ echo "What do you want to install?"
 
 select de in "gnome" "kde" "larbs" "base install" "Nothing, I can install it myself"; do
     case $de in
-        gnome ) install_gnome; break;;
-        kde ) install_gnome; break;;
-        larbs ) install_gnome; break;;
-        base install ) install_base; break;;
-        Nothing, I can install it myself ) break;;
+        "gnome" ) install_gnome; break;;
+        "kde" ) install_gnome; break;;
+        "larbs" ) install_gnome; break;;
+        "base install" ) install_base; break;;
+        "Nothing, I can install it myself" ) break;;
     esac
 done
 
