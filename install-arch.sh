@@ -9,9 +9,11 @@ select yn in "Yes" "No"; do
     esac
 done
 
+clear
+
 # ask the user which drive to partition
 fdisk -l
-echo "Enter drive name (for example sda)"
+echo "\nEnter drive name (for example sda)\n"
 read driveToPartition
 
 # confirmation
@@ -26,7 +28,7 @@ done
 
 
 # Partitioning the drive
-echo "Enter desired swap size (Example: 4G)"
+echo "\nEnter desired swap size (Example: 4G)"
 read swapSize
 
 
@@ -68,7 +70,10 @@ cp /root/arch-install-script/install-arch-2.sh /mnt
 sed -i s/sdX/${driveToPartition}/ /mnt/install-arch-2.sh
 chmod +x /mnt/install-arch-2.sh
 
+clear
+
 echo "Chrooting into the new system"
+echo "Run ./install-arch-2.sh"
 arch-chroot /mnt
 
 

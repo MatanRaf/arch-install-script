@@ -2,8 +2,7 @@
 
 # This script will be run in chroot
 
-echo "In Chroot"
-ls
+
 ln -sf /usr/share/zoneinfo/Israel /etc/localtime
 hwclock --systohc
 
@@ -23,10 +22,11 @@ echo "127.0.0.1	localhost" >> /etc/hosts
 echo "::1		localhost" >> /etc/hosts
 echo "127.0.1.1	$myhostname.localdomain	$myhostnamet" >> /etc/hosts
 
+echo "\nSetting up root password"
 passwd
 
 pacman -S --noconfirm grub
-grub-install --target=i386-pc /dev/sdX
+grub-install /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -S --noconfirm networkmanager
@@ -59,6 +59,7 @@ function install_larbs(){
     sh larbs.sh
 }
 
+clear
 echo "What do you want to install?"
 
 select de in "gnome" "kde" "larbs" "base install" "Nothing, I can install it myself"; do
@@ -71,4 +72,6 @@ select de in "gnome" "kde" "larbs" "base install" "Nothing, I can install it mys
     esac
 done
 
+clear
 echo "Thank you for using this Arch Linux install script!"
+echo "You may now restart the computer after removing iso"
